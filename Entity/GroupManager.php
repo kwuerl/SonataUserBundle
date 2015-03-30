@@ -11,7 +11,7 @@
 
 namespace Sonata\UserBundle\Entity;
 
-use FOS\UserBundle\Entity\GroupManager as BaseGroupManager;
+use FOS\UserBundle\Model\GroupManager as BaseGroupManager;
 use Sonata\UserBundle\Model\GroupManagerInterface;
 
 /**
