@@ -70,6 +70,10 @@
                 <source>user_block_logout</source>
                 <target>Finalitzar sesió</target>
             </trans-unit>
+            <trans-unit id="user_block_profile">
+                <source>user_block_profile</source>
+                <target>Perfil</target>
+            </trans-unit>
             <trans-unit id="user_form.label_username">
                 <source>form.label_username</source>
                 <target>Nom d'usuari</target>
@@ -133,6 +137,10 @@
             <trans-unit id="filter.label_groups">
                 <source>filter.label_groups</source>
                 <target>Grups</target>
+            </trans-unit>
+            <trans-unit id="filter.label_roles">
+                <source>filter.label_roles</source>
+                <target>Perfils</target>
             </trans-unit>
             <trans-unit id="filter.label_firstname">
                 <source>filter.label_firstname</source>
@@ -501,6 +509,18 @@
             <trans-unit id="form.password_confirmation">
                 <source>form.password_confirmation</source>
                 <target>form.password_confifmation</target>
+            </trans-unit>
+            <trans-unit id="title_user_edit_password">
+                <source>title_user_edit_password</source>
+                <target>title_user_edit_password</target>
+            </trans-unit>
+            <trans-unit id="title_user_resetting">
+                <source>title_user_resetting</source>
+                <target>title_user_resetting</target>
+            </trans-unit>
+            <trans-unit id="title_user_resetting_reset">
+                <source>title_user_resetting_reset</source>
+                <target>title_user_resetting_reset</target>
             </trans-unit>
         </body>
     </file>

@@ -12,14 +12,17 @@
 namespace Sonata\UserBundle\Admin\Model;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 
 class GroupAdmin extends Admin
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $formOptions = array(
-        'validation_groups' => 'Registration'
+        'validation_groups' => 'Registration',
     );
 
     /**
@@ -69,7 +72,7 @@ class GroupAdmin extends Admin
                     ->add('roles', 'sonata_security_roles', array(
                         'expanded' => true,
                         'multiple' => true,
-                        'required' => false
+                        'required' => false,
                     ))
                 ->end()
             ->end()

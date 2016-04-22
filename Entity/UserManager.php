@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -11,18 +12,18 @@
 namespace Sonata\UserBundle\Entity;
 
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
-use Sonata\UserBundle\Model\UserManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\UserBundle\Model\UserManagerInterface;
 
 /**
- * Class UserManager
+ * Class UserManager.
  *
- * @package Sonata\UserBundle\Entity
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class UserManager extends BaseUserManager implements UserManagerInterface
+class UserManager extends BaseUserManager implements UserManagerInterface, ManagerInterface
 {
     /**
      * {@inheritdoc}
@@ -116,7 +117,7 @@ class UserManager extends BaseUserManager implements UserManagerInterface
         $fields = $this->objectManager->getClassMetadata($this->class)->getFieldNames();
         foreach ($sort as $field => $direction) {
             if (!in_array($field, $fields)) {
-                unset($sort[$field]);
+                throw new \RuntimeException(sprintf("Invalid sort field '%s' in '%s' class", $field, $this->class));
             }
         }
         if (count($sort) == 0) {

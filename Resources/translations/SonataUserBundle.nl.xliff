@@ -70,6 +70,10 @@
                 <source>switch_user</source>
                 <target>Als gebruiker voordoen</target>
             </trans-unit>
+            <trans-unit id="user_block_profile">
+                <source>user_block_profile</source>
+                <target>Profiel</target>
+            </trans-unit>
             <trans-unit id="user_block_logout">
                 <source>user_block_logout</source>
                 <target>Uitloggen</target>
@@ -553,6 +557,18 @@
             <trans-unit id="form.password_confirmation">
                 <source>form.password_confirmation</source>
                 <target>Wachtwoord bevestigen</target>
+            </trans-unit>
+            <trans-unit id="title_user_edit_password">
+                <source>title_user_edit_password</source>
+                <target>Wijzig wachtwoord</target>
+            </trans-unit>
+            <trans-unit id="title_user_resetting">
+                <source>title_user_resetting</source>
+                <target>Wachtwoord vergeten</target>
+            </trans-unit>
+            <trans-unit id="title_user_resetting_reset">
+                <source>title_user_resetting_reset</source>
+                <target>Wachtwoord herstellen</target>
             </trans-unit>
         </body>
     </file>

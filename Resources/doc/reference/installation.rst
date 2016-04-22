@@ -9,8 +9,8 @@ Prerequisites
 
 PHP 5.3 and Symfony 2 are needed to make this bundle work; there are also some Sonata dependencies that need to be installed and configured beforehand:
 
-    - `SonataAdminBundle <http://sonata-project.org/bundles/admin>`_
-    - `SonataEasyExtendsBundle <http://sonata-project.org/bundles/easy-extends>`_
+    - `SonataAdminBundle <https://sonata-project.org/bundles/admin>`_
+    - `SonataEasyExtendsBundle <https://sonata-project.org/bundles/easy-extends>`_
 
 You will need to install those in their 2.0 branches (or master if they don't
 have a similar branch). Follow also their configuration step; you will find everything you need in their own installation chapter.
@@ -26,6 +26,8 @@ Enable the Bundle
 
     php composer.phar require sonata-project/user-bundle --no-update
     php composer.phar require sonata-project/doctrine-orm-admin-bundle  --no-update # optional
+    php composer.phar require friendsofsymfony/rest-bundle  --no-update # optional when using api
+    php composer.phar require nelmio/api-doc-bundle  --no-update # optional when using api
     php composer.phar update
 
 Next, be sure to enable the bundles in your and ``AppKernel.php`` file:
@@ -41,6 +43,7 @@ Next, be sure to enable the bundles in your and ``AppKernel.php`` file:
         return array(
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             // ...
             // You have 2 options to initialize the SonataUserBundle in your AppKernel,
             // you can select which bundle SonataUserBundle extends
@@ -97,11 +100,11 @@ Add these config lines
 
         group:
             group_class:   Sonata\UserBundle\Entity\BaseGroup
-            group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
+            group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
 
         service:
-            user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
-    
+            user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
+
     doctrine:
 
         dbal:
@@ -187,9 +190,13 @@ Add the related security routing information:
 
     # app/config/routing.yml
 
-    sonata_user:
+    sonata_user_admin_security:
         resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
         prefix: /admin
+
+    sonata_user_admin_resetting:
+        resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
+        prefix: /admin/resetting
 
 Then, add a new custom firewall handlers for the admin:
 
@@ -226,6 +233,7 @@ Then, add a new custom firewall handlers for the admin:
                     failure_path:   null
                 logout:
                     path:           /admin/logout
+                    target:         /admin/login
                 anonymous:          true
 
             # -> end custom configuration
@@ -259,10 +267,11 @@ The last part is to define 3 new access control rules:
             - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-            # Admin login page needs to be access without credential
+            # Admin login page needs to be accessed without credential
             - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/admin/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
             # Secured part of the site
             # This config requires being logged for the whole site and having the admin role for the admin part.
@@ -332,10 +341,10 @@ classes:
 
         group:
             group_class:   Application\Sonata\UserBundle\Entity\Group
-            group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
+            group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
 
         service:
-            user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
+            user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
 
     doctrine:
 
